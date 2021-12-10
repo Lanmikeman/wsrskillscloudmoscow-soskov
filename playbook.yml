@@ -109,8 +109,12 @@
           state: directory
           mode: 0777
 
-        - name: Ansible copy file force
+       - name: Ansible copy file force
           copy:
             src: ~/
             dest: /skillcloud-ngsite
             force: no
+          
+					- name: Wait for server to restart
+					reboot:
+					reboot_timeout: 3600
