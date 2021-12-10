@@ -31,19 +31,13 @@
        rule: allow
        port: '1467'
        proto: tcp
-
-     - name: UFW - Allow all other incoming traffic by default
-       ufw:
-         state: enabled
-         policy: allow
-         direction: incoming
-
+       
     - name: Setup SSH port 1467
       lineinfile:
-         dest: "/etc/ssh/sshd_config"
-         regexp: "^Port 22"
-         line: "Port 1467"
-       notify: "Restart sshd"
+      dest: "/etc/ssh/sshd_config"
+      regexp: "^Port 22"
+      line: "Port 1467"
+      notify: "Restart sshd"
 
       - name: Allow key SSH auth
       lineinfile:
