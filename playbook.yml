@@ -88,11 +88,11 @@
 	
     - name: Update apt and install docker-ce
       apt: update_cache=yes name=docker-ce state=latest
-      
+ 
     - name: Install Docker Module for Python
       pip:
         name: docker
-	
+
     - name: Transfer and execute a script.
       hosts: server
       remote_user: test_user
@@ -102,19 +102,19 @@
            copy: src=docker-compose.sh dest=/home/test_user mode=0777
          - name: Execute the script
            command: sh /home/test_user/test.sh
-	   
+
      - name: Creates directory
        file:
           path: /skillcloud-ngsite
           state: directory
           mode: 0777
-	  
+
        - name: Ansible copy file force
           copy:
             src: ~/
             dest: /skillcloud-ngsite
             force: no
-	    
+
           - name: Wait for server to restart
           reboot:
           reboot_timeout: 3600
