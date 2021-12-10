@@ -14,30 +14,35 @@
       apt: name={{ item }} state=latest update_cache=yes
       loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
    
-    - name: UFW - Allow port 80
-      ufw:
-      rule: allow
-      port: '80'
-      proto: tcp
-         
-    - name: UFW - Allow port 8888
+     - name: UFW - Allow port 80
        ufw:
-       rule: allow
-       port: '8888'
-       proto: tcp
-         
-    - name: UFW - Allow port 1467
+         rule: allow
+         port: '80'
+         proto: tcp
+     - name: UFW - Allow port 8888
        ufw:
-       rule: allow
-       port: '1467'
-       proto: tcp
-       
-    - name: Setup SSH port 1467
-      lineinfile:
-      dest: "/etc/ssh/sshd_config"
-      regexp: "^Port 22"
-      line: "Port 1467"
-      notify: "Restart sshd"
+         rule: allow
+         port: '8888'
+         proto: tcp
+         
+     - name: UFW - Allow port 1467
+       ufw:
+         rule: allow
+         port: '1467'
+         proto: tcp
+
+     - name: UFW - Allow all other incoming traffic by default
+       ufw:
+         state: enabled
+         policy: allow
+         direction: incoming
+         
+     - name: Setup SSH port 1467
+       lineinfile:
+         dest: "/etc/ssh/sshd_config"
+         regexp: "^Port"
+         line: "Port 1467"
+       notify: "Restart sshd"
 
     - name: Allow key SSH auth
       lineinfile:
