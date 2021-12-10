@@ -15,22 +15,22 @@
       loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
    
     - name: UFW - Allow port 80
-       ufw:
-         rule: allow
-         port: '80'
-         proto: tcp
+      ufw:
+      rule: allow
+      port: '80'
+      proto: tcp
          
     - name: UFW - Allow port 8888
        ufw:
-         rule: allow
-         port: '8888'
-         proto: tcp
+       rule: allow
+       port: '8888'
+       proto: tcp
          
     - name: UFW - Allow port 1467
        ufw:
-         rule: allow
-         port: '1467'
-         proto: tcp
+       rule: allow
+       port: '1467'
+       proto: tcp
 
      - name: UFW - Allow all other incoming traffic by default
        ufw:
