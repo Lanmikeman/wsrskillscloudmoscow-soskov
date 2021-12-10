@@ -1,4 +1,4 @@
-- hosts: main
+- hosts: host
   become: yes
     
   tasks: 
