@@ -39,14 +39,14 @@
       line: "Port 1467"
       notify: "Restart sshd"
 
-      - name: Allow key SSH auth
+    - name: Allow key SSH auth
       lineinfile:
         path: /etc/ssh/sshd_config
         regexp: '^#PubkeyAuthentication yes'
         line: 'PubkeyAuthentication yes'   
         
     - name: Add a new user named devops
-     user:
+      user:
           name: "{{ item.name }}"
           shell: /bin/bash
           password: "{{ item.pass }}"
@@ -58,12 +58,11 @@
             
             - { name: 'Projectmanager', pass: 'oP92ugMSaCbe' }
             
-   - name: Add devops user to the sudoers
-     copy:
-          dest: "/etc/sudoers.d/{{item}}"
-          content: "{{item}}  ALL=(ALL)  NOPASSWD: ALL"
-          loop:
-          
+     - name: Add devops user to the sudoers
+       copy:
+       dest: "/etc/sudoers.d/{{item}}"
+       content: "{{item}}  ALL=(ALL)  NOPASSWD: ALL"
+       loop:
             - 'Webdeveloper'
             
             - 'Devopsengineer'
