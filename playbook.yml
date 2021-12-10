@@ -58,11 +58,11 @@
             
             - { name: 'Projectmanager', pass: 'oP92ugMSaCbe' }
             
-     - name: Add devops user to the sudoers
-       copy:
-       dest: "/etc/sudoers.d/{{item}}"
-       content: "{{item}}  ALL=(ALL)  NOPASSWD: ALL"
-       loop:
+    - name: Add devops user to the sudoers
+      copy:
+      dest: "/etc/sudoers.d/{{item}}"
+      content: "{{item}}  ALL=(ALL)  NOPASSWD: ALL"
+      loop:
             - 'Webdeveloper'
             
             - 'Devopsengineer'
@@ -98,16 +98,16 @@
 
      - name: Creates directory
        file:
-          path: /skillcloud-ngsite
-          state: directory
-          mode: 0777
+       path: /skillcloud-ngsite
+       state: directory
+       mode: 0777
 
-       - name: Ansible copy file force
-          copy:
-            src: ~/
-            dest: /skillcloud-ngsite
-            force: no
+     - name: Ansible copy file force
+       copy:
+       src: ~/
+       dest: /skillcloud-ngsite
+       force: no
 
-       - name: Wait for server to restart
-          reboot:
-          reboot_timeout: 3600
+      - name: Wait for server to restart
+        reboot:
+        reboot_timeout: 3600
